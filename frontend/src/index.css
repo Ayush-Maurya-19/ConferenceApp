@@ -9,3 +9,9 @@
   gap:10px;
   background-color:lightblue;
 }
+//table border color
+table{
+  border-collapse:collapse;
+  width:100%;
+
+}

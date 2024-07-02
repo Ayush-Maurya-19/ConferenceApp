@@ -3,7 +3,7 @@ const express = require("express");
 const userRoutes = require("./routes/userRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 const conferenceRoutes = require("./routes/conferenceRoutes");
-const resistrationRoutes = require("./routes/resistrationRoutes");
+const registrationRoutes = require("./routes/registrationRoutes");
 const feedbackRoutes = require("./routes/feedbackRoutes");
 const cors = require("cors")
 
@@ -17,7 +17,7 @@ app.use(cors({
 app.use("/user", userRoutes);
 app.use("/admin", adminRoutes);
 app.use("/conference", conferenceRoutes);
-app.use("/resistration", resistrationRoutes);
+app.use("/registration", registrationRoutes);
 app.use("/feedback", feedbackRoutes);
 
 

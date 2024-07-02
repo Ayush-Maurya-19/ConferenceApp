@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import Login from "./Login";
+import { useEffect, useState } from "react";
 
 const ConferenceList = () => {
   const [conferences, setConferences] = useState([]);
-  const [userId, setUserId] = useState("");
+  const userId = JSON.parse(sessionStorage.user)._id;
+  const userName = JSON.parse(sessionStorage.user).name;
 
   useEffect(() => {
     const fetchConferences = async () => {
@@ -16,7 +16,6 @@ const ConferenceList = () => {
         console.log("Error in fetching conference data: ", err);
       }
     };
-
     fetchConferences();
   }, []);
 
@@ -27,11 +26,11 @@ const ConferenceList = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ userId, conferenceId }),
+        body: JSON.stringify({ userId, conferenceId, userName }),
       });
       const data = await response.json();
       if (response.ok) {
-        alert("Registration Successful");
+        alert("Registered successfully");
         console.log(data);
       } else {
         console.log("Error", data);
@@ -42,11 +41,6 @@ const ConferenceList = () => {
       alert("Error registering for the conference");
     }
   };
-
-  useEffect(() => {
-    const storedUserId = localStorage.getItem("userId");
-    setUserId(storedUserId);
-  }, []);
 
   const handleSubmit = async (e, conferenceId) => {
     e.preventDefault();
