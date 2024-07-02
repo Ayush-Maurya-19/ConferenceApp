@@ -22,58 +22,56 @@ const ConferenceList = () => {
 
   const handleRegister = async (conferenceId) => {
     try {
-      const response = await fetch(`http://localhost:5000/resistration/add`, {
+      const response = await fetch("http://localhost:5000/registration/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({userId, conferenceId  }),
-         
+        body: JSON.stringify({ userId, conferenceId }),
       });
       const data = await response.json();
       if (response.ok) {
-        alert("Registration Sucsessfully");
+        alert("Registration Successful");
         console.log(data);
       } else {
         console.log("Error", data);
-        alert("Error Registration for conference");
+        alert("Error registering for the conference");
       }
     } catch (err) {
-      console.log("Error Registration for conference", err);
-      alert("Error Registration for conference");
+      console.log("Error registering for the conference", err);
+      alert("Error registering for the conference");
     }
   };
 
   useEffect(() => {
-    const userId = localStorage.getItem("userId");
-    setUserId(userId);
+    const storedUserId = localStorage.getItem("userId");
+    setUserId(storedUserId);
   }, []);
 
-  const handleSumbit = async (e) => {
+  const handleSubmit = async (e, conferenceId) => {
     e.preventDefault();
     const feedback = e.target.feedback.value;
     try {
-      const response = await fetch(`http://localhost:5000/feedback/add`, {
+      const response = await fetch("http://localhost:5000/feedback/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ userId, feedback }),
+        body: JSON.stringify({ userId, feedback, conferenceId }),
       });
       const data = await response.json();
       if (response.ok) {
-        alert("Feedback Sucsessfully");
-        console.log(e.target.feedback.value)
+        alert("Feedback submitted successfully");
+        console.log(feedback);
       } else {
         console.log("Error", data);
-        alert("Error Feedback for conference");
+        alert("Error submitting feedback for the conference");
       }
     } catch (err) {
-      console.log("Error Feedback for conference", err);
-      alert("Error Feedback for conference");
+      console.log("Error submitting feedback for the conference", err);
+      alert("Error submitting feedback for the conference");
     }
-  }
-    
+  };
 
   return (
     <div>
@@ -82,13 +80,11 @@ const ConferenceList = () => {
         {conferences.map((conference) => (
           <li key={conference._id}>
             <h4>{conference.title}</h4>
-            <p>{conference.discription}</p>
+            <p>{conference.description}</p>
             <p>{conference.date}</p>
-            <button onClick={() => handleRegister(conferences._id)}>
-              Register
-            </button>
-            {/* Feedback Formstore data in feedback model in the backend it should hold user id and the content of the feedback */}
-            <form onSubmit={handleSumbit}>
+            <button onClick={() => handleRegister(conference._id)}>Register</button>
+            {/* Feedback Form */}
+            <form onSubmit={(e) => handleSubmit(e, conference._id)}>
               <input type="text" name="feedback" placeholder="Enter your feedback" />
               <button type="submit">Submit Feedback</button>
             </form>

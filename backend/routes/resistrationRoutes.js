@@ -4,7 +4,7 @@ const registrationModel = require("../models/registrationModel");
 const router = express.Router();
 
 router.post("/add", (req, res) => {
-  console.log(res.body); //log the res body
+  console.log(req.body); // log the req body
 
   new registrationModel(req.body)
     .save()
@@ -18,7 +18,7 @@ router.post("/add", (req, res) => {
 });
 
 router.get("/getall", (req, res) => {
-    registrationModel
+  registrationModel
     .find({})
     .then((data) => {
       res.json(data);
@@ -30,7 +30,7 @@ router.get("/getall", (req, res) => {
 });
 
 router.get("/getbyid/:id", (req, res) => {
-    registrationModel
+  registrationModel
     .findById(req.params.id)
     .then((data) => {
       res.json(data);
@@ -42,7 +42,7 @@ router.get("/getbyid/:id", (req, res) => {
 });
 
 router.put("/update/:id", (req, res) => {
-    registrationModel
+  registrationModel
     .findByIdAndUpdate(req.params.id, req.body, { new: true })
     .then((data) => {
       res.json(data);
@@ -54,7 +54,7 @@ router.put("/update/:id", (req, res) => {
 });
 
 router.delete("/delete/:id", (req, res) => {
-    registrationModel
+  registrationModel
     .findByIdAndDelete(req.params.id)
     .then((data) => {
       res.json(data);
@@ -66,7 +66,7 @@ router.delete("/delete/:id", (req, res) => {
 });
 
 router.post("/authenticate", (req, res) => {
-    registrationModel
+  registrationModel
     .findOne(req.body)
     .then((result) => {
       if (result !== null) res.json(result);
