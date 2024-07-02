@@ -1,7 +1,4 @@
-import { useState } from 'react'
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import Home from './components/Home'
 import Navbar from './components/Navbar'
@@ -13,9 +10,7 @@ import AdminLogin from './components/AdminLogin'
 import AdminSignup from './components/AdminSignup'
 import ManageConferenceDetails from './components/ManageConferenceDetails'
 import EditConference from './components/EditConference'
-
 function App() {
-  const [count, setCount] = useState(0)
 
  
   return (

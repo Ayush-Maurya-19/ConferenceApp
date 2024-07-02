@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 const Registration = () => {
   const [registration, setRegistration] = useState([]);
@@ -11,7 +11,7 @@ const Registration = () => {
         console.log(data);
         setRegistration(data);
       } catch (err) {
-        console.log("Error in fetching conference data: ", err);
+        console.log("Error in fetching registration data: ", err);
       }
     };
 
@@ -21,14 +21,26 @@ const Registration = () => {
   return <div>
     
     <h2>Registration List</h2>
-    <ul>
-      {registration.map((registrations) =>{
-        <li key={registrations._id}>
-        <h3>{registrations.conferenceId.title}</h3>
-        <p>{registrations.userId.name}</p>
-        </li>
-      })}
-    </ul>
+    <table>
+      <thead>
+        <tr>
+          <th>Registration Id</th>
+          <th>User Id</th>
+          <th>Conference Id</th>
+          <th>User Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        {registration.map((registration) => {
+          return <tr key={registration._id}>
+            <td>{registration._id}</td>
+            <td>{registration.userId}</td>
+            <td>{registration.userName}</td>
+            <td>{registration.conferenceId}</td>
+          </tr>;
+        })}
+      </tbody>
+    </table>
   </div>;
 };
 

@@ -1,16 +1,9 @@
-const { model, Schema, Types } = require("../connection");
+const { model, Schema } = require('../connection');
 
-const registrationSchema = new Schema({
-  userId: {
-    type: Types.ObjectId,
-    ref: "user",
-    required: true,
-  },
-  conferenceId: {
-    type: Types.ObjectId,
-    ref: "conference",
-    required: true,
-  }
+const mySchema = new Schema({
+    userId: String,
+    conferenceId: String,
+    userName: String
 });
 
-module.exports = model("Registration", registrationSchema);
+module.exports = model( 'registration', mySchema );
